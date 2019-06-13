@@ -31,3 +31,8 @@
     transform: rotate(360deg);
   }
 }
+
+.json-nodes {
+  border: 2px solid rgb(167, 136, 136);
+  margin: 4px;
+}

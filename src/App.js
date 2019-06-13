@@ -1,24 +1,155 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = (props) => {
+  const json = {
+
+    "UI": {
+
+      "baseType": "App",
+
+      "children": [
+
+        {
+
+          "baseType": "TextField",
+
+          "props": {
+
+          }
+
+        },
+
+        {
+
+          "baseType": "Divider",
+
+          "props": {
+
+          }
+
+        },
+
+        {
+
+          "baseType": "Card",
+
+          "children": [
+
+            {
+
+              "baseType": "CardHeader",
+
+              "props": {
+
+                "title": "URL Avatar",
+
+                "subtitle": "Subtitle",
+
+                "avatar": "Sample Avatar"
+
+              }
+
+            },
+
+            {
+
+              "baseType": "CardTitle",
+
+              "props": {
+
+                "title": "card title",
+
+                "subtitle": "sub title"
+
+              }
+
+            },
+
+            {
+
+              "baseType": "CardText",
+
+              "props": {
+
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec mattis pretium massa. Aliquam erat volutpat."
+
+              }
+
+            },
+
+            {
+
+              "baseType": "CardActions",
+
+              "children": [
+
+                {
+
+                  "baseType": "FlatButton",
+
+                  "props": {
+
+                    "label": "Action 1"
+
+                  }
+
+                },
+
+                {
+
+                  "baseType": "FlatButton",
+
+                  "props": {
+
+                    "label": "Action 1"
+
+                  }
+
+                }
+
+              ]
+
+            }
+
+          ]
+
+        }
+
+      ]
+
+    }
+
+  }
+
+  const createComponent = (json, arr = []) => {
+    for (let obj of json) {
+
+      if (obj.hasOwnProperty("children")) {
+        arr.push(<div className="json-nodes" basetype={obj.baseType} {...props} key={obj.baseType}>{obj.baseType}{createComponent(obj["children"])}</div>);
+      } else {
+        arr.push(
+          <div className="json-nodes" basetype={obj.baseType} {...props} key={obj.baseType}>{obj.baseType}</div>
+        );
+      }
+
+    }
+
+    return arr;
+    // return json.map((obj) => {
+    //   if (obj.hasOwnProperty("children")) {
+    //     return createComponent(obj["children"]);
+    //   }
+    //   return (
+    //     <div basetype={obj.baseType} {...props} key={obj.baseType}>{obj.baseType}</div>
+    //   )
+    // });
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        createComponent(json["UI"]["children"])
+      }
     </div>
   );
 }
