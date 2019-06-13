@@ -126,10 +126,21 @@ const App = (props) => {
     for (let obj of json) {
 
       if (obj.hasOwnProperty("children")) {
-        arr.push(<div className="json-nodes" basetype={obj.baseType} {...props} key={obj.baseType}>{obj.baseType}{createComponent(obj["children"])}</div>);
+        arr.push(
+          <obj.baseType
+            className="json-nodes"
+            basetype={obj.baseType}
+            key={obj.baseType}
+            {...props} >{obj.baseType}{createComponent(obj["children"])}</obj.baseType>
+        );
       } else {
         arr.push(
-          <div className="json-nodes" basetype={obj.baseType} {...props} key={obj.baseType}>{obj.baseType}</div>
+            <obj.baseType 
+            className="json-nodes" 
+            basetype={obj.baseType} 
+            {...props}
+            key={obj.baseType}
+            {...props} >{obj.baseType}</obj.baseType>
         );
       }
 
