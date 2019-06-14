@@ -1,7 +1,66 @@
 import React from 'react';
 import './App.css';
 
+const TextField = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
+const Divider = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
+const Card = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
+const CardHeader = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
+const CardTitle = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
+const CardText = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
+const CardActions = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
+const FlatButton = (props) => {
+  return (
+    <div className={props.className}>{props.baseType}{props.children}</div>
+  );
+}
+
 const App = (props) => {
+  const components = {
+    TextField,
+    Divider,
+    Card,
+    CardHeader,
+    CardTitle,
+    CardText,
+    CardActions,
+    FlatButton
+  };
+
   const json = {
 
     "UI": {
@@ -126,21 +185,21 @@ const App = (props) => {
     for (let obj of json) {
 
       if (obj.hasOwnProperty("children")) {
+        let childArr = createComponent(obj["children"]);
+
         arr.push(
-          <obj.baseType
-            className="json-nodes"
-            basetype={obj.baseType}
-            key={obj.baseType}
-            {...props} >{obj.baseType}{createComponent(obj["children"])}</obj.baseType>
+          React.createElement(
+            components[obj.baseType],
+            { className: "json-nodes", key: obj.baseType, baseType: obj.baseType, props: { ...obj.props } },
+            [...childArr]
+          )
         );
       } else {
         arr.push(
-            <obj.baseType 
-            className="json-nodes" 
-            basetype={obj.baseType} 
-            {...props}
-            key={obj.baseType}
-            {...props} >{obj.baseType}</obj.baseType>
+          React.createElement(
+            components[obj.baseType],
+            { className: "json-nodes", key: obj.baseType, baseType: obj.baseType, props: { ...obj.props } }
+          )
         );
       }
 
